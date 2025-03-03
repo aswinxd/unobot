@@ -78,19 +78,21 @@ def display_color_group(color, game):
 
 
 def error(update: Update, context: CallbackContext):
-    """Simple error handler"""
     logger.exception(context.error)
 
 
 def send_async(bot, *args, **kwargs):
-    """Send a message asynchronously"""
     if 'timeout' not in kwargs:
         kwargs['timeout'] = TIMEOUT
+
+    if 'text' in kwargs and not kwargs['text']:
+        logger.error("❌ Attempted to send an empty message. Aborting send_async.")
+        return
 
     try:
         dispatcher.run_async(bot.sendMessage, *args, **kwargs)
     except Exception as e:
-        error(None, None, e)
+        logger.exception(f"❌ Failed to send async message: {e}")
 
 
 def answer_async(bot, *args, **kwargs):
