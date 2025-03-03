@@ -26,8 +26,7 @@ try:
         config = json.load(f)
 except FileNotFoundError:
     config = {}
-
-TOKEN = os.getenv("TOKEN", config.get("token"))
+TOKEN = os.getenv("TOKEN", "7983032897:AAGAVl91CFHwZJvexJfPMQEg3VR06dSVTVs")
 WORKERS = int(os.getenv("WORKERS", config.get("workers", 32)))
 ADMIN_LIST = os.getenv("ADMIN_LIST", config.get("admin_list", None))
 
